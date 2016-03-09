@@ -16,7 +16,7 @@ npm install
 ## Usage
 
 Using the geolocation feature may require running the app on a local server.
-Navigate to either the src or dist folder, depending if you want to use production
+Navigate to either the src or dist folder, depending on if you want to use production
 code, and start a local server. An example of how to do this, if you have Python 3
 installed on your computer and want to use port 8080:
 
