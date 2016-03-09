@@ -1,0 +1,115 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title></title>
+
+	<!-- jQuery -->
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+	<!-- Google Maps -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQNXDPhG6335Be85pAPqxrnSKU8hXCoGA&libraries=places"></script>
+
+	<!-- Knockout -->
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js'></script>
+
+	<!-- OAuth stuff -->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
+	<script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
+
+	<!-- Replace local js and css files with concatenated and minified versions -->
+	<script src="js/app.min.js"></script>
+
+	<link rel="stylesheet" href="css/style.min.css"/>
+
+	</head>
+
+	<body>
+
+		<div class="selection-page" data-bind="visible: neighborhoodSelectionViewActive">
+			<h1>Neighborhood Yelp Map</h1>
+			<div class="neighborhood-search-label">
+				<label for="neighborhood-search-term">Enter your neighborhood: </label>
+			</div>
+			<div class="neighborhood-input-container">
+				<input data-bind="value: neighborhoodSearchTerm, event: {focus: clearNeighborhoodErrorMessage}" id="neighborhood-search-term" type="text">
+				<div data-bind="with: neighborhoodSearchMessage">
+					<span data-bind="text: $data" class="error-message"></span>
+				</div>
+			</div>
+			<div>
+				<button data-bind="click: neighborhoodSearch" class="search-button">Search</button>
+			</div>
+			<div>
+				<div class="current-location-section">or</div>
+				<div class="current-location-section">
+					<button data-bind="click: getGeolocation" class="search-button">Use Current Location</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="menu" data-bind="visible: neighborhoodMapViewActive, css: {'menu-hidden' : menuHiddenMobile, 'menu-visible' : !menuHiddenMobile() }">
+			<div data-bind="with: neighborhood" class="neighborhood-title">
+				<h2 data-bind="text: name"></h2>
+				<div data-bind="text: formattedAddress"></div>
+			</div>
+
+			<div class="neighborhood-selection-link-div">
+				<a data-bind="click: switchToSelectionView">Choose another neighborhood &gt;</a>
+			</div>
+
+			<div class="place-search-message" data-bind="visible: placeSearchMessage, text: placeSearchMessage"></div>
+
+			<div class="filter">
+				<div data-bind="visible: places().length > 0">
+					<div class="label-container">
+						<label for="filter-term">Filter by name or category: </label></div>
+					<div class="text-input-container">
+						<input data-bind="textInput: filterTerm, hasFocus: filterFieldHasFocus" id="filter-term"/>
+
+					<ul class="autocomplete" data-bind="foreach: autocompleteTerms, visible: filterFieldHasFocus() || mouseOnAutocomplete(), event: {mouseover:  setMouseOnAutocomplete, mouseout: unsetMouseOnAutocomplete }">
+						<li class="autocomplete-item" data-bind="visible: containsFilterTerm, click: setFilterTerm, text: term"></li>
+					</ul>
+					</div>
+
+				</div>
+			</div>
+
+			<ul class="places" data-bind="foreach: places">
+				<li class="place" data-bind="click: $parent.setSelectedPlace, visible: passesFilter, css: { 'selected-place' : isSelectedPlace }" >
+					<div data-bind="text: name"></div>
+					<div data-bind="visible: isSelectedPlace" class="selected-place-details">
+						<div class="details-section">Category: <span data-bind="text: categories[0].name"></span></div>
+						<div class="details-section">Rating: <span data-bind="text: rating"></span></div>
+
+						<div class="details-section">Phone: <span data-bind="text: phone"></span></div>
+						<div class="details-section">Address: <span data-bind="text: address"></span></div>
+						<div class="details-section">Review snippet: <span data-bind="text: snippetText"></span></div>
+
+						<!-- Flickr photo -->
+						<div data-bind="with: flickrPhoto" class="details-section">
+							<div>Flickr:</div>
+							<img data-bind="attr: {src: $data}" class="flickr-image">
+						</div>
+
+						<!-- Flickr error message -->
+						<div data-bind="with: flickrMessage" class="details-section">
+							<span data-bind="text: $data" class="error-message"></span>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<button class="hamburger-button" data-bind="css: { 'hamburger-menu-hidden' : menuHiddenMobile, 'hamburger-menu-visible' : !menuHiddenMobile() }, click: toggleMenuHiddenMobile, visible: neighborhoodMapViewActive"><img src="images/hamburger.png"></button>
+
+		<div class="map-container" data-bind="css: { 'map-container-hidden': neighborhoodSelectionViewActive()}">
+			<div class="map" id="map" data-bind="css: { 'map-hidden': neighborhoodSelectionViewActive()}"></div>
+		</div>
+	</body>
+</html>
