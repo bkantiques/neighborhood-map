@@ -27,6 +27,23 @@ python -m http.server:8080
 Then to view the page you should be able to go to `http://localhost:8080` in your
 browser.
 
+The app only works with neighborhoods that are known to Google. Here is a selection 
+of neighborhoods that work in testing: SoHo (good example of Flickr photos), Upper 
+East Side, Upper West Side, Harlem, Park Slope, Bayside, Flushing, Fort Greene (all 
+in New York City), Downtown Atlanta, Peoplestown (Atlanta), Encino, Hollywood Hills (LA),
+Guildwood, Harbord Village (Toronto), Whitechapel, Marylebone (London), Trastevere, and
+Quadraro (Rome).  
+
+If you put in a neighborhood that Google does not know, you will get an error message.
+
+The 'Use current location' button only gets results if you're in a neighborhood Google knows.
+Many locations are not known to Google. One way to test- make sure you are runnning on a 
+local server in the `src` directory. Put a breakpoint on line 245 of app.js, and when the 
+breakpoint is reached, edit the `lat` and `lng` properties of the local variable `latlng`.
+Some values that Google recognizes: `lat: 40.7869, lng: -73.9753`. It is also important to 
+be in a browser that supports all the necessary features. Google Chrome and Firefox seem to 
+work well.
+
 ## Build process
 
 If you make changes in the `src` directory and want to build the `dist` directory, use
