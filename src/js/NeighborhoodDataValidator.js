@@ -40,18 +40,18 @@ var NeighborhoodDataValidator = (function() {
       isValid = false;
     }
 
-    return isValid
-  }
+    return isValid;
+  };
 
   // Check that name and address are strings (as expected)
   nv.validNameAndAddress = function(neighborhood) {
     return typeof(neighborhood.name) === 'string' && typeof(neighborhood.formatted_address) === 'string';
-  }
+  };
 
   // Check if neighborhood has valid, required properties
   nv.validNeighborhood = function(neighborhood) {
     return this.validCoordinates(neighborhood) && this.validNameAndAddress(neighborhood);
-  }
+  };
 
   return nv;
 })();

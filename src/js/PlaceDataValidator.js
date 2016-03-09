@@ -11,7 +11,7 @@
     pv.validLocation = function(place) {
       return place.location &&
         place.location.address && typeof(place.location.address[0]) === 'string';
-    }
+    };
 
     // Check if a variable is a valid latitude or longitude
     pv.validLatitude = function(coordinate) {

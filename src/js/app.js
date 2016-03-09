@@ -39,7 +39,7 @@ $(document).ready(function() {
     // Phone and snippet text have fallback values in case data is missing
     this.phone = place.phone || 'No phone information';
 
-    this. snippetText = place.snippet_text || 'No review snippet available'
+    this. snippetText = place.snippet_text || 'No review snippet available';
 
     // Set categories
     place.categories.forEach(function(category) {
@@ -95,7 +95,7 @@ $(document).ready(function() {
         '<div>Rating: ' + place.rating + '</div>' +
         '<div>Review snippet: ' + place.snippetText + '</div></div>');
 
-      this.infowindow.open(this.map, place.mapMarker)
+      this.infowindow.open(this.map, place.mapMarker);
     };
 
     /*
@@ -175,7 +175,7 @@ $(document).ready(function() {
         var marker = places[i].mapMarker;
         marker.setMap(null);
       }
-    }
+    };
 
     return mv;
 
@@ -251,7 +251,7 @@ $(document).ready(function() {
                 var result = results[i];
 
                 if(result.types && result.types.includes('neighborhood') && result.formatted_address) {
-                  var neighborhoodFound = true;
+                  neighborhoodFound = true;
                   self.neighborhoodSearchTerm(result.formatted_address);
                   self.neighborhoodSearch();
                 }
@@ -268,7 +268,7 @@ $(document).ready(function() {
               self.neighborhoodSearchMessage('Could not find neighborhood for your location');
             }
           });
-    };
+    }
 
     /*
     Error handler for a geolocation error- sets error message.
@@ -288,8 +288,8 @@ $(document).ready(function() {
         case error.UNKNOWN_ERROR:
           self.neighborhoodSearchMessage("An unknown error occurred while getting your location.");
           break;
-      };
-    };
+      }
+    }
 
     // Search google places for a neighborhood using the neighborhood search term
     self.neighborhoodSearch = function() {
@@ -652,7 +652,7 @@ $(document).ready(function() {
       });
 
       // If no hash, go to selection view
-      this.get('', function() { this.app.runRoute('get', '#neighborhood-selection') });
+      this.get('', function() { this.app.runRoute('get', '#neighborhood-selection'); });
     }).run();
 
     // Shows or hides menu on mobile
@@ -668,7 +668,7 @@ $(document).ready(function() {
     */
     self.localStorageAvailable = function() {
       try {
-        var storage = window['localStorage'],
+        var storage = window.localStorage,
           x = '__storage_test__';
         storage.setItem(x, x);
         storage.removeItem(x);
@@ -722,4 +722,4 @@ $(document).ready(function() {
 
   ko.applyBindings(new ViewModel());
 
-})
+});
