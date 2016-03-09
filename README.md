@@ -50,7 +50,8 @@ router to navigate between neighborhood selection and the neighborhood map. It u
 to save the neighborhood you searched for and which view you were last in, and loads this information
 when you return to the app.  It also uses the geolocation API to give users the option to search
 based on your current location. This will only work if you are in a neighborhood that Google can
-find a name for.
+find a name for. You can filter the places by name or category. There is an autocomplete to help
+with filtering.
 
 ## Issues
 
