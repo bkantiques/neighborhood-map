@@ -2720,16 +2720,15 @@ $(document).ready(function() {
             place.passesFilter = ko.computed(function() {
               var filterTerm = self.filterTerm().toLowerCase().trim();
 
-              if(filterTerm === '') {
-                return true;
-              }
-
               var pass = false;
               var name = this.name.toLowerCase();
               var categories = this.categories;
               var marker = this.mapMarker;
 
-              if(name.indexOf(filterTerm) != -1)
+              if(filterTerm === '') {
+                pass = true;
+              }
+              else if(name.indexOf(filterTerm) != -1)
                 pass = true;
               else {
                 for(var i = 0; i < categories.length; i++) {
