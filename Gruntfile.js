@@ -20,6 +20,15 @@ module.exports = function(grunt) {
             }
         },
 
+        // Adds css prefixes
+        autoprefixer: {
+            dist: {
+                files: {
+                    'src/css/style.css': 'src/css/sassed/style.css'
+                }
+            }
+        },
+
         uglify: {
             // Minifies concatenated js and puts in dist folder
             build: {
@@ -41,7 +50,7 @@ module.exports = function(grunt) {
         sass: {
             src: {
                 files: {
-                    'src/css/style.css': 'src/css/style.scss'
+                    'src/css/sassed/style.css': 'src/css/style.scss'
                 }
             }
         },
@@ -55,12 +64,28 @@ module.exports = function(grunt) {
         },
 
         watch: {
-            css: {
-                files: 'src/css/*.scss',
-                tasks: ['sass:src'],
+            dist: {
+                files: ['src/css/*.scss','src/index.html', 'src/js/*.js'],
+                tasks: ['build'],
                 options: {
                     livereload: true
                 }
+            }
+        },
+
+        browserSync: {
+            bsFiles: {
+                src: [
+                    'src/index.html',
+                    'src/css/style.css',
+                    'src/js/*.js'
+                ]
+            },
+            options: {
+                server: {
+                    baseDir: './'
+                },
+                watchTask: true
             }
         }
 
@@ -69,6 +94,7 @@ module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
 
     // 4. Register tasks
-    grunt.registerTask('build', ['sass', 'concat', 'cssmin', 'uglify', 'processhtml']);
+    grunt.registerTask('build', ['sass', 'autoprefixer', 'concat', 'cssmin', 'uglify', 'processhtml']);
+    grunt.registerTask('watchSync', ['browserSync', 'watch']);
 
 };
