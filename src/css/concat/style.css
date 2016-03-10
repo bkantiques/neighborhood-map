@@ -447,7 +447,8 @@ input {
   border-radius: 12px;
   padding: 12px;
   background-color: #823282;
-  transition: color 0.5s, background-color 0.5s; }
+  -webkit-transition: color 0.5s, background-color 0.5s;
+          transition: color 0.5s, background-color 0.5s; }
 
 .search-button:hover {
   color: #823282;
@@ -590,13 +591,17 @@ ul {
 
   .menu-hidden,
   .hamburger-menu-hidden {
-    transform: translateX(-265px);
-    transition: transform 1s; }
+    -webkit-transform: translateX(-265px);
+            transform: translateX(-265px);
+    -webkit-transition: -webkit-transform 1s;
+            transition: transform 1s; }
 
   .menu-visible,
   .hamburger-menu-visible {
-    transform: translateX(0px);
-    transition: transform 1s; }
+    -webkit-transform: translateX(0px);
+            transform: translateX(0px);
+    -webkit-transition: -webkit-transform 1s;
+            transition: transform 1s; }
 
   .menu {
     position: absolute;
@@ -605,5 +610,3 @@ ul {
 @media screen and (min-width: 769px) {
   .hamburger-button {
     display: none; } }
-
-/*# sourceMappingURL=style.css.map */
