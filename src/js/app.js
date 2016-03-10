@@ -754,16 +754,16 @@ function googleSuccess() {
 
 // If unable to retrieve google map scripts
 function googleError() {
-  $neighborhoodSearchMessage = $('#neighborhood-search-message');
+  var $neighborhoodSearchMessage = $('#neighborhood-search-message');
 
   // Display error message
   $neighborhoodSearchMessage.html('<span class="error-message">Error retrieving google map scripts. ' +
       'This app cannot function without these scripts.</span>');
 
   // Hide menu, hamburger button and map container
-  $menu = $('.menu');
-  $hamburgerButton = $('.hamburger-button');
-  $mapContainer = $('.map-container');
+  var $menu = $('.menu');
+  var $hamburgerButton = $('.hamburger-button');
+  var $mapContainer = $('.map-container');
 
   $menu.hide();
   $hamburgerButton.hide();

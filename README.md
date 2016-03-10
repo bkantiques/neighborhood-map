@@ -29,7 +29,7 @@ browser. Alternatively, you can run on localhost with the `grunt watchSync` task
 See the Build process section for directions.
 
 The app only works with neighborhoods that are known to Google. Here is a selection
-of neighborhoods that work in testing: SoHo (good example of Flickr photos), Upper
+of some neighborhoods that work in testing: SoHo (good example of Flickr photos), Upper
 East Side, Upper West Side, Harlem, Park Slope, Bayside, Flushing, Fort Greene (all
 in New York City), Downtown Atlanta, Peoplestown (Atlanta), Encino, Hollywood Hills (LA),
 Guildwood, Harbord Village (Toronto), Whitechapel, Marylebone (London), Trastevere, and
