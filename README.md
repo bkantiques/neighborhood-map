@@ -25,34 +25,39 @@ python -m http.server:8080
 ```
 
 Then to view the page you should be able to go to `http://localhost:8080` in your
-browser.
+browser. Alternatively, you can run on localhost with the `grunt watchSync` task.
+See the Build process section for directions.
 
-The app only works with neighborhoods that are known to Google. Here is a selection 
-of neighborhoods that work in testing: SoHo (good example of Flickr photos), Upper 
-East Side, Upper West Side, Harlem, Park Slope, Bayside, Flushing, Fort Greene (all 
+The app only works with neighborhoods that are known to Google. Here is a selection
+of neighborhoods that work in testing: SoHo (good example of Flickr photos), Upper
+East Side, Upper West Side, Harlem, Park Slope, Bayside, Flushing, Fort Greene (all
 in New York City), Downtown Atlanta, Peoplestown (Atlanta), Encino, Hollywood Hills (LA),
 Guildwood, Harbord Village (Toronto), Whitechapel, Marylebone (London), Trastevere, and
-Quadraro (Rome).  
+Quadraro (Rome).
 
 If you put in a neighborhood that Google does not know, you will get an error message.
 
 The 'Use current location' button only gets results if you're in a neighborhood Google knows.
-Many locations are not known to Google. One way to test- make sure you are runnning on a 
-local server in the `src` directory. Put a breakpoint on line 245 of app.js, and when the 
+Many locations are not known to Google. One way to test- make sure you are runnning on a
+local server in the `src` directory. Put a breakpoint on line 270 of app.js, and when the
 breakpoint is reached, edit the `lat` and `lng` properties of the local variable `latlng`.
-Some values that Google recognizes: `lat: 40.7869, lng: -73.9753`. It is also important to 
-be in a browser that supports all the necessary features. Google Chrome and Firefox seem to 
-work well.
+Some values that Google recognizes: `lat: 40.7869, lng: -73.9753` or `lat: 37.7600, lng: -122.4200`.
+It is also important to be in a browser that supports all the necessary features. Google Chrome
+and Firefox seem to work well.
 
 ## Build process
 
 If you make changes in the `src` directory and want to build the `dist` directory, use
 `grunt build`.
 
-Runnning `grunt watch` automatically updates the stylesheet in the `src` directory,
-`src/css/style.css` when the Sass stylesheet `src/css/style.scss` is saved.
+Runnning `grunt watchSync` automatically runs the build task when changes are made in the `src` directory
+to index.html, `js` files in the `js` directory or `css/styles.scss`. It also refreshes the browser with
+browser sync. When running watchSync, the command line will tell you what port it is running on. To view
+the project and have it automatically refresh when changes are made, you must navigate to
+`localhost:[port]/src/` for the `src` version or `localhost:[port]/dist/` for the `dist` version.
 
-The build process includes Sass processing, css and js concatenation and minification, and html processing.
+The build process includes Sass processing, css and js concatenation and minification, css autoprefixing,
+browser synch and html processing.
 
 ## Features
 
