@@ -86,17 +86,33 @@ $(document).ready(function() {
       place.mapMarker.setAnimation(null);
     };
 
-    // When a place is selected, sets info window content and opens info window on correct marker
+    /*
+    When a place is selected, sets info window content and opens info window on correct marker and
+    centers map there
+    */
     mv.setSelectedPlace = function(place) {
+      // Make marker bounce
       place.mapMarker.setAnimation(google.maps.Animation.BOUNCE);
 
+      // Set infowindow text and open
       this.infowindow.setContent('<div class="infowindow"><div>Name: ' + place.name + '</div>' +
         '<div>Category: ' + place.categories[0].name + '</div>' +
         '<div>Rating: ' + place.rating + '</div>' +
         '<div>Review snippet: ' + place.snippetText + '</div></div>');
 
       this.infowindow.open(this.map, place.mapMarker);
+
+      // Center map on marker
+      this.map.panTo(place.mapMarker.getPosition());
     };
+
+    // Stop selected place marker from bouncing, for use when info window is closed
+    mv.stopSelectedPlaceAnimation = function() {
+      myViewModel.selectedPlace().mapMarker.setAnimation(null);
+    };
+
+    // When info window is closed, stop marker from boundcing
+    google.maps.event.addListener(mv.infowindow, 'closeclick', mv.stopSelectedPlaceAnimation);
 
     /*
     Finds specific icons for several types of businesses. Defaults to
@@ -153,13 +169,14 @@ $(document).ready(function() {
       place.mapMarker = marker;
     };
 
-    // If business does not pass filter, hide marker and close info window if needed
+    // If business does not pass filter, stop bouncing, hide marker and close info window if needed
     mv.filterMarker = function(business, passesFilterBoolean) {
       var marker = business.mapMarker;
 
       if(passesFilterBoolean)
         marker.setVisible(true);
       else {
+        marker.setAnimation(null);
         marker.setVisible(false);
         if(business.isSelectedPlace()) {
           mv.infowindow.close();
@@ -174,6 +191,13 @@ $(document).ready(function() {
       for(var i = 0; i < places.length; i++) {
         var marker = places[i].mapMarker;
         marker.setMap(null);
+      }
+    };
+
+    // When window is resized, reset map bounds to neighborhood bounds
+    window.onresize = function() {
+      if(myViewModel.neighborhood()) {
+        mv.setMapNeighborhood(myViewModel.neighborhood());
       }
     };
 
@@ -467,7 +491,7 @@ $(document).ready(function() {
                 }
               }
 
-              // Hide marker if doesn't pass filter
+              // Hide marker if doesn't pass filter- also close infowindow if necessary
               MapView.filterMarker(this, pass);
 
               return pass;
@@ -720,6 +744,7 @@ $(document).ready(function() {
 
   }
 
-  ko.applyBindings(new ViewModel());
+  var myViewModel = new ViewModel();
+  ko.applyBindings(myViewModel);
 
 });
