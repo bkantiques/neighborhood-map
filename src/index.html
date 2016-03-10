@@ -7,30 +7,6 @@
 
 	<title>Neighborhood Map</title>
 
-	<!-- jQuery -->
-	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-
-	<!-- Google Maps -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQNXDPhG6335Be85pAPqxrnSKU8hXCoGA&libraries=places"></script>
-
-	<!-- Knockout -->
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js'></script>
-
-	<!-- OAuth stuff -->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-	<script src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
-	<script src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
-
-	<!-- Replace local js and css files with concatenated and minified versions -->
-	<!-- build:js js/app.min.js -->
-	<script src="js/sammy.js"></script>
-
-	<script src="js/NeighborhoodDataValidator.js"></script>
-	<script src="js/PlaceDataValidator.js"></script>
-	<script src="js/app.js"></script>
-	<!-- /build -->
-
 	<!-- Google Roboto font -->
 	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 
@@ -50,7 +26,7 @@
 			</div>
 			<div class="neighborhood-input-container">
 				<input data-bind="value: neighborhoodSearchTerm, event: {focus: clearNeighborhoodErrorMessage}" id="neighborhood-search-term" type="text">
-				<div data-bind="with: neighborhoodSearchMessage">
+				<div id="neighborhood-search-message" data-bind="with: neighborhoodSearchMessage">
 					<span data-bind="text: $data" class="error-message"></span>
 				</div>
 			</div>
@@ -123,5 +99,29 @@
 		<div class="map-container" data-bind="css: { 'map-container-hidden': neighborhoodSelectionViewActive()}">
 			<div class="map" id="map" data-bind="css: { 'map-hidden': neighborhoodSelectionViewActive()}"></div>
 		</div>
+
+		<!-- jQuery -->
+		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+		<!-- Knockout -->
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js'></script>
+
+		<!-- OAuth stuff -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+		<script src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
+		<script src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
+
+		<!-- Replace local js and css files with concatenated and minified versions -->
+		<!-- build:js js/app.min.js -->
+		<script src="js/sammy.js"></script>
+
+		<script src="js/NeighborhoodDataValidator.js"></script>
+		<script src="js/PlaceDataValidator.js"></script>
+		<script src="js/app.js"></script>
+		<!-- /build -->
+
+		<!-- Google Maps -->
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQNXDPhG6335Be85pAPqxrnSKU8hXCoGA&libraries=places&callback=googleSuccess" onerror="googleError()"></script>
 	</body>
 </html>
