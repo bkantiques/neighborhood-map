@@ -2,7 +2,7 @@
 
 This app finds neighborhoods based on a search term the user enters, then
 finds, displays on a map, and retrieves information about the top-rated places
-on Yelp in the neighborhood.
+on Yelp in the neighborhood. Built with Knockout, Sammy router and Grunt.
 
 ## Installation
 
